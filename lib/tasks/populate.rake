@@ -1,54 +1,9 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+namespace :db do
+  desc "Erase and fill databse"
+    task :populate => :environment do
+  require 'faker'
 
-
-# megan = Merchant.create!(name: 'Megans Marmalades', address: '123 Main St', city: 'Denver', state: 'CO', zip: 80218)
-# # brian = Merchant.create!(name: 'Brians Bagels', address: '125 Main St', city: 'Denver', state: 'CO', zip: 80218)
-# megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 5 )
-# # megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
-# # brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
-#
-#
-# merchant_1 = FactoryBot.create(:merchant)
-# user_1 = FactoryBot.create(:user)
-# FactoryBot.create(:merchant_user, merchant_id: merchant_1.id)
-#
-# user_2 = FactoryBot.create(:user)
-# item_1 = FactoryBot.create(:item, merchant_id: merchant_1.id)
-# item_2 = FactoryBot.create(:item, merchant_id: merchant_1.id)
-# item_3 = FactoryBot.create(:item, merchant_id: merchant_1.id)
-#
-# order_1 = FactoryBot.create(:order, user_id: user_2.id)
-# FactoryBot.create(:item_order, order_id: order_1.id, item_id: item_1.id, price: item_1.price)
-# FactoryBot.create(:item_order, order_id: order_1.id, item_id: item_2.id, price: item_2.price)
-# FactoryBot.create(:item_order, order_id: order_1.id, item_id: item_3.id, price: item_3.price)
-#
-#
-#
-# merchant_2 = FactoryBot.create(:merchant)
-# user_3 = FactoryBot.create(:user)
-# FactoryBot.create(:merchant_user, merchant_id: merchant_2.id)
-#
-# user_4 = FactoryBot.create(:user)
-# item_4 = FactoryBot.create(:item, merchant_id: merchant_2.id)
-# item_5 = FactoryBot.create(:item, merchant_id: merchant_2.id)
-# item_6 = FactoryBot.create(:item, merchant_id: merchant_2.id)
-#
-# order_2 = FactoryBot.create(:order, user_id: user_2.id)
-# FactoryBot.create(:item_order, order_id: order_2.id, item_id: item_4.id, price: item_4.price)
-# FactoryBot.create(:item_order, order_id: order_2.id, item_id: item_5.id, price: item_5.price)
-# FactoryBot.create(:item_order, order_id: order_2.id, item_id: item_6.id, price: item_6.price)
-
-
-
-
-require 'faker'
-
+  Rake::Task['db:reset'].invoke
 
 #create merchant & items
     15.times do
@@ -115,3 +70,5 @@ require 'faker'
                           quantity: Faker::Number.number(digits: 2))
 
     end
+  end
+end
