@@ -32,7 +32,6 @@ FactoryBot.define do
     email { Faker::Internet.email(name: "#{name}") }
     password { Faker::Internet.password(min_length: 8) }
   end
-
   factory :item do
     name { Faker::Commerce.product_name }
     description { Faker::Lorem.sentence }
@@ -56,26 +55,20 @@ item_1 = FactoryBot.create(:item, merchant_id: merchant_1.id)
 item_2 = FactoryBot.create(:item, merchant_id: merchant_1.id)
 item_3 = FactoryBot.create(:item, merchant_id: merchant_1.id)
 
-
 order_1 = Order.create!(user_id: user_2.id)
 
 OrderItem.create!(order_id: order_1.id, item_id: item_3.id, price: item_3.price)
 
-
 OrderItem.create!(order_id: order_1.id, item_id: item_2.id, price: item_2.price)
-
 
 OrderItem.create!(order_id: order_1.id, item_id: item_1.id, price: item_1.price)
 
 order_2 = Order.create!(user_id: user_1.id)
 
 
-
 merchant_2 = FactoryBot.create(:merchant)
 user_3 = FactoryBot.create(:user)
 user_2.merchant_id = merchant_2.id
-
-# FactoryBot.create(:merchant_user, merchant_id: merchant_2.id)
 
 user_4 = FactoryBot.create(:user)
 item_4 = FactoryBot.create(:item, merchant_id: merchant_2.id)
@@ -86,9 +79,7 @@ order_2 = Order.create!(user_id: user_4.id)
 
 OrderItem.create!(order_id: order_2.id, item_id: item_4.id, price: item_4.price)
 
-
 OrderItem.create!(order_id: order_2.id, item_id: item_5.id, price: item_5.price)
-
 
 OrderItem.create!(order_id: order_2.id, item_id: item_6.id, price: item_6.price)
 end
