@@ -64,11 +64,11 @@ RSpec.describe Item do
       @order_3.order_items.create!(item: @gator, price: @gator.price, quantity: 1)
     end
 
-    it '.active_items' do
+    it '#active_items' do
       expect(Item.active_items).to eq([@ogre, @giant])
     end
 
-    it '.by_popularity()' do
+    it '#by_popularity()' do
       expect(Item.by_popularity).to eq([@hippo, @nessie, @ogre, @gator, @giant])
       expect(Item.by_popularity(3, "ASC")).to eq([@giant, @gator, @ogre])
       expect(Item.by_popularity(3, "DESC")).to eq([@hippo, @nessie, @ogre])
