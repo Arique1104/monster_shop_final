@@ -1,3 +1,4 @@
+require 'factory_bot_rails'
 require 'faker'
 require 'simplecov'
 SimpleCov.start
