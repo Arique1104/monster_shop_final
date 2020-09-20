@@ -3,8 +3,6 @@ namespace :db do
     task :populate => :environment do
   require 'faker'
 
-  Rake::Task['db:reset'].invoke
-
 #create merchant & items
     15.times do
       merchant_1 = Merchant.create!(name: Faker::Name.unique.name,
@@ -15,13 +13,13 @@ namespace :db do
       item_1 = merchant_1.items.create!(name: Faker::Commerce.product_name,
                       description: Faker::Lorem.sentence,
                       price: Faker::Commerce.price,
-                      image: Faker::LoremPixel.image(size: "730x411"),
+                      image: Faker::LoremPixel.image(size: "200x211"),
                       active: true,
                       inventory: Faker::Number.number(digits: 3))
       item_2 = merchant_1.items.create!(name: Faker::Commerce.product_name,
                       description: Faker::Lorem.sentence,
                       price: Faker::Commerce.price,
-                      image: Faker::LoremPixel.image(size: "730x411"),
+                      image: Faker::LoremPixel.image(size: "200x211"),
                       active: true,
                       inventory: Faker::Number.number(digits: 3))
 
@@ -33,7 +31,7 @@ namespace :db do
       item_3 = merchant_2.items.create!(name: Faker::Commerce.product_name,
                       description: Faker::Lorem.sentence,
                       price: Faker::Commerce.price,
-                      image: Faker::LoremPixel.image(size: "730x411"),
+                      image: Faker::LoremPixel.image(size: "200x211"),
                       active: true,
                       inventory: Faker::Number.number(digits: 3))
       item_4 = merchant_2.items.create!(name: Faker::Commerce.product_name,
