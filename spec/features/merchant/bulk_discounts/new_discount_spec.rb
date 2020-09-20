@@ -21,6 +21,11 @@ RSpec.describe 'New Merchant Bulk Discount' do
       expect(current_path).to eq("/merchant/bulk_discounts")
 
       five_percent_discount = BulkDiscount.create!(name: "5% off!", percent_discount: 5, min_purchase: 20, item_id: @item.id)
+
+      expect(page).to have_content("#{five_percent_discount.name}")
+      expect(page).to have_content("#{five_percent_discount.percent_discount}")
+      expect(page).to have_content("#{five_percent_discount.min_purchase}")
+
     end
 
   #   it 'I can create an  item for a merchant' do
