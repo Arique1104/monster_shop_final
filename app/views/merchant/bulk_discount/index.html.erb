@@ -1,6 +1,4 @@
-<h1>My Bulk Discounts</h1>
-<!% require "pry"; binding.pry %>
-
-<% @bulk_discounts.each do |bulk_discount|%>
-<p><%= link_to "Bulk Discount #{bulk_discount.id}", "/merchant/bulk_discounts/#{bulk_discount.id}" %></p>
+<% @bulk_discounts.each do |bulk_discount| %>
+<p><%= bulk_discount.name %></p>
+<p><%= bulk_discount.min_purchase %></p>
 <% end %>
