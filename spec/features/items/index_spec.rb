@@ -22,6 +22,8 @@ RSpec.describe 'Item Index Page' do
     it 'I can see a list of all active items' do
       visit '/items'
 
+
+#RIGHT HERE!
       within "#item-#{@ogre.id}" do
         expect(page).to have_link(@ogre.name)
         expect(page).to have_content(@ogre.description)
