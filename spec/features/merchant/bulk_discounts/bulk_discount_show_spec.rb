@@ -39,17 +39,25 @@ RSpec.describe 'New Merchant Bulk Discount' do
 
       expect(current_path).to eq("/merchant/bulk_discounts")
 
-
       expect(page).to have_content("#{@discount.name}")
 
-      expect(page).to have_button("Activate")
-
+      click_link "#{@discount.name}"
+      expect(page).to have_content("#{@discount.percent_discount}")
+      expect(page).to have_content("#{@discount.min_purchase}")
+      expect(@discount.active).to eq(false)
       click_on "Activate"
 
-      expect(current_path).to eq("/merchant/bulk_discounts")
+      expect(current_path).to eq("/merchant/bulk_discounts/#{@discount.id}")
 
-      expect(page).to have_button("Deactivate")
+      @discount.reload
+      expect(@discount.active).to eq(true)
 
+      click_on "Deactivate"
+
+      expect(current_path).to eq("/merchant/bulk_discounts/#{@discount.id}")
+
+      @discount.reload
+      expect(@discount.active).to eq(false)
     end
 
   #   it 'I can create an  item for a merchant' do
