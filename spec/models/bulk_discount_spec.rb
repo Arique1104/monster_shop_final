@@ -10,10 +10,6 @@ RSpec.describe BulkDiscount do
 
   end
   describe 'relationships' do
-    it {should belong_to :item}
+    it {should belong_to :merchant}
   end
-  # five_percent_discount = BulkDiscount.create!(name: "5% off!",
-  # percent_discount: 5,
-  # min_purchase: 20,
-  # merchant_id: @merchant_1.id)
-  end
+end

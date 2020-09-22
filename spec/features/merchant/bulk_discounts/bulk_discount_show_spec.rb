@@ -10,24 +10,45 @@ RSpec.describe 'New Merchant Bulk Discount' do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@m_user)
 
       @item = @merchant_1.items.create!(name: "Mello", description: "Wowzer!", price: 12.50, inventory: 100, image: "https://i2.wp.com/www.cosect.net/wp-content/uploads/2019/07/wowzers-600x200.jpg?resize=600%2C200&ssl=1")
-      @five_percent_discount = BulkDiscount.create!(name: "5% off!", percent_discount: 5, min_purchase: 20, item_id: @item.id)
+
+      @five_percent_discount = BulkDiscount.create!(name: "5% off!", percent_discount: 5, min_purchase: 20, merchant_id: @merchant_1.id)
     end
 
+    it 'It can present a show page for a discount' do
 
-    it 'I can click a link to a new bulk item page' do
       visit "/merchant"
 
       click_link 'My Bulk Discounts'
 
       expect(current_path).to eq("/merchant/bulk_discounts")
 
-      click_link "Bulk Discount #{@five_percent_discount.id}"
+      click_link "Bulk Discount #{@five_percent_discount.name}"
 
       expect(current_path).to eq("/merchant/bulk_discounts/#{@five_percent_discount.id}")
 
       expect(page).to have_content("#{@five_percent_discount.name}")
       expect(page).to have_content("#{@five_percent_discount.percent_discount}")
       expect(page).to have_content("#{@five_percent_discount.min_purchase}")
+
+    end
+
+    xit "a Merchant can activate and deactivate" do
+      visit "/merchant"
+
+      click_link 'My Bulk Discounts'
+
+      expect(current_path).to eq("/merchant/bulk_discounts")
+
+
+      expect(page).to have_content("#{@discount.name}")
+
+      expect(page).to have_button("Activate")
+
+      click_on "Activate"
+
+      expect(current_path).to eq("/merchant/bulk_discounts")
+
+      expect(page).to have_button("Deactivate")
 
     end
 
