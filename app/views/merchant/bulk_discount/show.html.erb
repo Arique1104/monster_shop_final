@@ -1,3 +1,14 @@
+<% if current_merchant_user? %>
 <h1><%= @bulk_discount.name %></h1>
 <p>Percentage Discount <%= @bulk_discount.percent_discount %></p>
 <p>Minimum Purchase Requirement <%= @bulk_discount.min_purchase %></p>
+
+
+<p><%= button_to "Activate", "/merchant/bulk_discounts/#{@bulk_discount.id}?set_status_to=true", method: :patch %>
+
+</p>
+<!% @bulk_discount.active == false %>
+
+<!% else %>
+<!%= button_tag "Deactivate", "/merchant/bulk_discounts/#{@bulk_discount.id}?set_status_to=false", method: :patch %>
+<% end %>

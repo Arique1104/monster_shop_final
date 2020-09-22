@@ -11,7 +11,7 @@ RSpec.describe 'New Merchant Bulk Discount' do
 
       @item = @merchant_1.items.create!(name: "Mello", description: "Wowzer!", price: 12.50, inventory: 100, image: "https://i2.wp.com/www.cosect.net/wp-content/uploads/2019/07/wowzers-600x200.jpg?resize=600%2C200&ssl=1")
 
-      @five_percent_discount = BulkDiscount.create!(name: "5% off!", percent_discount: 5, min_purchase: 20, merchant_id: @merchant_1.id)
+      @discount = BulkDiscount.create!(name: "5% off!", percent_discount: 5, min_purchase: 20, merchant_id: @merchant_1.id)
     end
 
     it 'It can present a show page for a discount' do
@@ -22,17 +22,17 @@ RSpec.describe 'New Merchant Bulk Discount' do
 
       expect(current_path).to eq("/merchant/bulk_discounts")
 
-      click_link "Bulk Discount #{@five_percent_discount.name}"
+      click_link "#{@discount.name}"
 
-      expect(current_path).to eq("/merchant/bulk_discounts/#{@five_percent_discount.id}")
+      expect(current_path).to eq("/merchant/bulk_discounts/#{@discount.id}")
 
-      expect(page).to have_content("#{@five_percent_discount.name}")
-      expect(page).to have_content("#{@five_percent_discount.percent_discount}")
-      expect(page).to have_content("#{@five_percent_discount.min_purchase}")
+      expect(page).to have_content("#{@discount.name}")
+      expect(page).to have_content("#{@discount.percent_discount}")
+      expect(page).to have_content("#{@discount.min_purchase}")
 
     end
 
-    xit "a Merchant can activate and deactivate" do
+    it "a Merchant can activate and deactivate" do
       visit "/merchant"
 
       click_link 'My Bulk Discounts'
