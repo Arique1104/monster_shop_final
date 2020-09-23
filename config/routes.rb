@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get :root, to: 'welcome#index'
+  get "/", to: 'welcome#index'
 
   resources :merchants do
     resources :items, only: [:index]
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
   namespace :merchant do
     get '/bulk_discounts/:id/edit', to: 'bulk_discount#edit'
     patch 'bulk_discounts/:id/update', to: 'bulk_discount#update'
+    delete 'bulk_discounts/:id', to: 'bulk_discount#destroy'
     post '/bulk_discounts/create', to: 'bulk_discount#create'
     get '/bulk_discounts/new', to: 'bulk_discount#new'
     get '/bulk_discounts/:id', to: 'bulk_discount#show'
