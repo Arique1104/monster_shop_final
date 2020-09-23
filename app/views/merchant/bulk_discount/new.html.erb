@@ -1,0 +1,15 @@
+<%= form_tag "/merchant/bulk_discounts/create", method: :post do %>
+    <%= label_tag :name %>
+    <br>
+    <%= text_field_tag :name %>
+    <br>
+    <%= label_tag :percent_discount %>
+    <br>
+    <%= number_field_tag :percent_discount %>
+    <br>
+    <%= label_tag :min_purchase %>
+    <br>
+    <%= number_field_tag :min_purchase %>
+
+    <%= submit_tag 'Submit' %>
+  <% end %>

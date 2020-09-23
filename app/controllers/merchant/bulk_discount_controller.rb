@@ -1,4 +1,20 @@
 class Merchant::BulkDiscountController < Merchant::BaseController
+
+  def new
+
+  end
+
+  def create
+    @discount = BulkDiscount.new(name: secure_params[:name], percent_discount: secure_params[:percent_discount], min_purchase: secure_params[:min_purchase], merchant_id: current_user.merchant_id)
+
+    if @discount.save
+      redirect_to "/merchant/bulk_discounts"
+    else
+      flash[:notice] = "Please try again"
+      render :new
+    end
+  end
+
   def index
     @bulk_discounts = BulkDiscount.all
   end
@@ -15,6 +31,7 @@ class Merchant::BulkDiscountController < Merchant::BaseController
 
   private
   def secure_params
-    params.permit(:id, :name, :percent_discount, :min_purchase)
+    params.permit(:name, :percent_discount, :min_purchase)
   end
+
 end
