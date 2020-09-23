@@ -1,10 +1,11 @@
 class Cart
-  attr_reader :contents, :discount_ids
+  attr_reader :contents, :discounts
 
   def initialize(contents)
     @contents = contents || {}
     @contents.default = 0
-    @discount_ids = []
+    @discounts = []
+    find_discount
   end
 
   def add_item(item_id)
@@ -38,7 +39,22 @@ class Cart
   end
 
   def subtotal_of(item_id)
-    @contents[item_id.to_s] * Item.find(item_id).price
+    @item = Item.find(item_id)
+    @quantity = @contents[item_id.to_s]
+
+
+    if @discounts.count == 0
+      @total_amounts = @quantity * @item.price
+    else
+      @discounts.each do |discount|
+        if discount.merchant_id == @item.merchant_id
+          amount_off = (discount.percent_discount/100.0) * (@quantity * @item.price)
+
+          @total_amount = (@quantity * @item.price) - amount_off
+        end
+      end
+    end
+    @total_amount
   end
 
   def limit_reached?(item_id)
@@ -49,7 +65,7 @@ class Cart
     @contents.each do |item, quantity|
       @item = Item.find(item.to_i)
       discount = BulkDiscount.find_by(merchant_id: @item.merchant.id)
-      @discount_ids << discount.id if discount.min_purchase == quantity
+      @discounts << discount if (discount.min_purchase == quantity && discount.active == true)
     end
   end
 end

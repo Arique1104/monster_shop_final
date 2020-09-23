@@ -40,5 +40,9 @@ RSpec.describe OrderItem do
       expect(@order_item_1.fulfilled).to eq(true)
       expect(@ogre.inventory).to eq(3)
     end
+    it '.apply_discount' do
+      expect(@order_item_1.subtotal).to eq(40.5)
+      BulkDiscounts.create!()
+    end
   end
 end

@@ -52,8 +52,8 @@ RSpec.describe Cart do
     end
 
     it '#subtotal_of()' do
-      expect(@cart.subtotal_of(@ogre.id)).to eq(20)
-      expect(@cart.subtotal_of(@giant.id)).to eq(100)
+      expect(@cart.subtotal_of(@ogre.id)).to eq(19.0)
+      expect(@cart.subtotal_of(@giant.id)).to eq(95.0)
     end
 
     it '#limit_reached?()' do
@@ -68,9 +68,7 @@ RSpec.describe Cart do
     end
 
     it "#find_discount" do
-      expect(@cart.discount_ids.count).to eq(0)
-      @cart.find_discount
-      expect(@cart.discount_ids.count).to eq(1)
+      expect(@cart.discounts.count).to eq(1)
     end
   end
 end

@@ -14,4 +14,9 @@ class OrderItem < ApplicationRecord
   def fulfillable?
     item.inventory >= quantity
   end
+
+  def apply_discount
+    require "pry"; binding.pry
+
+  end
 end
