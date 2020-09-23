@@ -1,15 +1,15 @@
 <%= form_tag "/merchant/bulk_discounts/#{@bulk_discount.id}/update", method: :patch do %>
     <%= label_tag :name %>
     <br>
-    <%= text_field_tag :name %>
+    <%= text_field_tag :name, @bulk_discount.name %>
     <br>
     <%= label_tag :percent_discount %>
     <br>
-    <%= number_field_tag :percent_discount %>
+    <%= number_field_tag :percent_discount, @bulk_discount.percent_discount %>
     <br>
     <%= label_tag :min_purchase %>
     <br>
-    <%= number_field_tag :min_purchase %>
+    <%= number_field_tag :min_purchase, @bulk_discount.min_purchase %>
 
     <%= submit_tag 'Submit' %>
   <% end %>
