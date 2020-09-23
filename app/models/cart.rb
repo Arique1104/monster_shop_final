@@ -1,9 +1,10 @@
 class Cart
-  attr_reader :contents
+  attr_reader :contents, :discount_ids
 
   def initialize(contents)
     @contents = contents || {}
     @contents.default = 0
+    @discount_ids = []
   end
 
   def add_item(item_id)
@@ -42,5 +43,13 @@ class Cart
 
   def limit_reached?(item_id)
     count_of(item_id) == Item.find(item_id).inventory
+  end
+
+  def find_discount
+    @contents.each do |item, quantity|
+      @item = Item.find(item.to_i)
+      discount = BulkDiscount.find_by(merchant_id: @item.merchant.id)
+      @discount_ids << discount.id if discount.min_purchase == quantity
+    end
   end
 end
