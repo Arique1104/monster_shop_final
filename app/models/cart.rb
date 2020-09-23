@@ -28,10 +28,10 @@ class Cart
   end
 
   def grand_total
-    grand_totals = 0.0
+    grand_total = 0.0
     if @discounts.count == 0
       @contents.each do |item_id, quantity|
-        grand_totals += Item.find(item_id).price * quantity
+        grand_total += Item.find(item_id).price * quantity
       end
     else
       @discounts.each do |discount|
@@ -39,14 +39,14 @@ class Cart
           item = Item.find(item_id)
           if discount.merchant_id == item.merchant_id
             amount_off = (discount.percent_discount/100.0) * (quantity * item.price)
-            grand_totals += (item.price * quantity) - amount_off
+            grand_total += (item.price * quantity) - amount_off
           else
-            grand_totals += item.price * quantity
+            grand_total += item.price * quantity
           end
         end
       end
     end
-    grand_totals
+    grand_total
   end
 
   def count_of(item_id)

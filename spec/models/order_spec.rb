@@ -22,6 +22,15 @@ RSpec.describe Order do
       @order_item_3 = @order_2.order_items.create!(item: @ogre, price: @ogre.price, quantity: 2, fulfilled: false)
     end
 
+    it '.find_discount' do
+      expect(@order_1.merchant_subtotal(@megan.id)).to eq(101.25)
+      @discount = BulkDiscount.create!(name: "10% off!", min_purchase: 5, percent_discount: 10, merchant_id: @megan.id)
+      @order_1.find_discount
+       expect(@order_1.merchant_subtotal(@megan.id)).to eq(35)
+
+
+    end
+
     it '.grand_total' do
       expect(@order_1.grand_total).to eq(101.25)
       expect(@order_2.grand_total).to eq(140.5)
@@ -64,6 +73,7 @@ RSpec.describe Order do
       expect(@order_1.status).to eq('packaged')
       expect(@order_2.status).to eq('pending')
     end
+
   end
 
   describe 'class methods' do

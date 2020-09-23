@@ -6,6 +6,11 @@ class Order < ApplicationRecord
   enum status: ['pending', 'packaged', 'shipped', 'cancelled']
 
   def grand_total
+    merchant_ids = items.pluck(:merchant_id)
+
+    @discounts = BulkDiscount.find_by(merchant_id: merchant_ids)
+
+    require "pry"; binding.pry
     order_items.sum('price * quantity')
   end
 
@@ -41,5 +46,17 @@ class Order < ApplicationRecord
 
   def self.by_status
     order(:status)
+  end
+
+  def find_discount
+    merchant_ids = items.pluck(:merchant_id)
+    @discounts = BulkDiscount.find_by(merchant_id: merchant_ids)
+    # x = items.joins(:merchant).joins(:bulk_discounts).where(merchant_id: merchant_ids)
+
+    #
+    #
+    # item_price = items.sum(:price)
+    # discounts = BulkDiscount.where(merchant_id: merchant_ids)
+    # amount_off = discounts.joins(:item).where(merchant_id: merchant_ids).sum("percent_discount / item.price * 100.0")
   end
 end
