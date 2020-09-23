@@ -42,14 +42,16 @@ class Cart
     @item = Item.find(item_id)
     @quantity = @contents[item_id.to_s]
 
-
     if @discounts.count == 0
-      @total_amounts = @quantity * @item.price
-    else
-      @discounts.each do |discount|
-        if discount.merchant_id == @item.merchant_id
-          amount_off = (discount.percent_discount/100.0) * (@quantity * @item.price)
+      @total_amount = @quantity * @item.price
+    end
 
+    if @discounts.count != 0
+      @discounts.each do |discount|
+        if discount.merchant_id != @item.merchant_id
+          @total_amount = @quantity * @item.price
+        else discount.merchant_id == @item.merchant_id
+          amount_off = (discount.percent_discount/100.0) * (@quantity * @item.price)
           @total_amount = (@quantity * @item.price) - amount_off
         end
       end
