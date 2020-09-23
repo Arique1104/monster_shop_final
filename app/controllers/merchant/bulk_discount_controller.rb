@@ -4,10 +4,12 @@ class Merchant::BulkDiscountController < Merchant::BaseController
 
   end
 
-  def create
-    @discount = BulkDiscount.new(name: secure_params[:name], percent_discount: secure_params[:percent_discount], min_purchase: secure_params[:min_purchase], merchant_id: current_user.merchant_id)
+ def create
+    merchant = current_user.merchant
+    @discount = merchant.bulk_discounts.new(secure_params)
 
     if @discount.save
+      flash[:notice] = "Discount successfully created"
       redirect_to "/merchant/bulk_discounts"
     else
       flash[:notice] = "Please try again"
