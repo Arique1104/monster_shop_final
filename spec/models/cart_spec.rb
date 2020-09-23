@@ -10,7 +10,7 @@ RSpec.describe Cart do
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
 
       @discount_1 = BulkDiscount.create!(name: "Labor Day Sale", percent_discount: 10, min_purchase: 2, merchant_id: @megan.id, active: true)
-      # BulkDiscount.create!(name: "Zoo Theme Mania", percent_discount: 50, min_purchase: 20, merchant_id: @megan.id, active: true)
+      BulkDiscount.create!(name: "Zoo Theme Mania", percent_discount: 50, min_purchase: 20, merchant_id: @megan.id, active: true)
 
       @cart = Cart.new({
         @ogre.id.to_s => 1,
