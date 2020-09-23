@@ -35,9 +35,13 @@ class Cart
     else
       @discounts.each do |discount|
         @contents.each do |item_id, quantity|
-          item_price = Item.find(item_id).price
-          amount_off = (discount.percent_discount/100.0) * (quantity * item_price)
-          grand_totals += (item_price * quantity) - amount_off
+          item = Item.find(item_id)
+          if discount.merchant_id == item.merchant_id
+            amount_off = (discount.percent_discount/100.0) * (quantity * item.price)
+            grand_totals += (item.price * quantity) - amount_off
+          else
+            grand_totals += item.price * quantity
+          end
         end
       end
     end
