@@ -1,3 +1,4 @@
+require "bulk_discount"
 class Cart
   attr_reader :contents, :discounts
 
@@ -81,7 +82,9 @@ class Cart
     @contents.each do |item, quantity|
       @item = Item.find(item.to_i)
       discount = BulkDiscount.find_by(merchant_id: @item.merchant.id)
-      @discounts << discount if (discount.min_purchase == quantity && discount.active == true)
+      if !discount.nil?
+        @discounts << discount if (discount.min_purchase == quantity && discount.active == true)
+      end
     end
   end
 end
