@@ -41,5 +41,38 @@ RSpec.describe "A merchant can edit a Bulk discount" do
       expect(page).to_not have_content("5% off!")
 
     end
+
+    it "can expect edit show page to have prior information" do
+
+      visit "/merchant"
+
+      click_link 'My Bulk Discounts'
+
+      expect(current_path).to eq("/merchant/bulk_discounts")
+
+      click_link "#{@discount.name}"
+
+      expect(current_path).to eq("/merchant/bulk_discounts/#{@discount.id}")
+
+      click_link "Edit Discount"
+
+      expect(current_path).to eq("/merchant/bulk_discounts/#{@discount.id}/edit")
+
+      expect(page).to have_content("#{@discount.name}")
+      expect(page).to have_content("#{@discount.percent_discount}")
+      expect(page).to have_content("#{@discount.min_purchase}")
+
+        fill_in :name, with: "Black Friday Sale"
+
+      click_on "Submit"
+
+      expect(current_path).to eq("/merchant/bulk_discounts/#{@discount.id}")
+
+      @discount.reload
+      expect(page).to have_content("Black Friday Sale")
+      expect(page).to_not have_content("5% off!")
+
+    end
+
   end
 end
