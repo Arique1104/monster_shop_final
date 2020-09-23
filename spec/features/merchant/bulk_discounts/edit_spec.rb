@@ -13,7 +13,7 @@ RSpec.describe "A merchant can delete a Bulk discount" do
       @discount = BulkDiscount.create!(name: "5% off!", percent_discount: 5, min_purchase: 20, merchant_id: @merchant_1.id)
     end
 
-    it 'It can delete a discount' do
+    it 'It can edit a discount' do
 
       visit "/merchant"
 
@@ -25,11 +25,17 @@ RSpec.describe "A merchant can delete a Bulk discount" do
 
       expect(current_path).to eq("/merchant/bulk_discounts/#{@discount.id}")
 
-      click_link "Delete Discount"
+      click_link "Edit Discount"
 
-      expect(current_path).to eq("/merchant/bulk_discounts")
+      expect(current_path).to eq("/merchant/bulk_discounts/edit")
 
-      expect(page).not_to have_content("#{@discount.name}")
+        fill_in :name, with: "Black Friday Sale"
+
+      click_on "Submit"
+
+      expect(page).to have_content("Black Friday Sale")
+      expect(page).to_not have_content("5% off!")
+
     end
   end
 end
