@@ -34,11 +34,13 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#logout'
 
   namespace :merchant do
+    get '/bulk_discounts/:id/edit', to: 'bulk_discount#edit'
+    patch 'bulk_discounts/:id/update', to: 'bulk_discount#update'
     post '/bulk_discounts/create', to: 'bulk_discount#create'
     get '/bulk_discounts/new', to: 'bulk_discount#new'
     get '/bulk_discounts/:id', to: 'bulk_discount#show'
     get '/bulk_discounts', to: 'bulk_discount#index'
-    patch '/bulk_discounts/:id', to: 'bulk_discount#update'
+    patch '/bulk_discounts/:id', to: 'bulk_discount#update_status'
 
     get '/', to: 'dashboard#index', as: :dashboard
     resources :orders, only: :show
