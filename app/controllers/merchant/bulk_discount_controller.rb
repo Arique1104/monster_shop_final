@@ -50,6 +50,11 @@ class Merchant::BulkDiscountController < Merchant::BaseController
     redirect_to "/merchant/bulk_discounts/#{@bulk_discount.id}"
   end
 
+  def destroy
+    BulkDiscount.destroy(params[:id])
+    redirect_to "/merchant/bulk_discounts"
+  end
+
   private
   def secure_params
     params.permit(:id, :name, :percent_discount, :min_purchase)
