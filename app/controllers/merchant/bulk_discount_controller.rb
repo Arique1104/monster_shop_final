@@ -18,7 +18,7 @@ class Merchant::BulkDiscountController < Merchant::BaseController
   end
 
   def index
-    @bulk_discounts = BulkDiscount.all
+    @bulk_discounts = current_user.merchant.bulk_discounts
   end
 
   def show
