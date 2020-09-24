@@ -8,9 +8,6 @@ RSpec.describe "Add Items to Cart" do
       @ogre = @megan.items.create!(name: 'Ogre', description: "I'm an Ogre!", price: 20, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 5 )
       @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
-
-
-
     end
 
     it "I can add an item from the items show page" do
@@ -60,6 +57,33 @@ RSpec.describe "Add Items to Cart" do
       expect(page).to have_content("Quantity: 3")
 
       expect(page).to have_content("Total: $54.00")
+
+    end
+
+    it "Test for a cart with items from at least 2 different merchants. One has a discount. Discount only applies to the item from merchant (that meets minimum quantities)" do
+      @discount_1 = @megan.bulk_discounts.create!(name: "Labor Day Sale", percent_discount: 10, min_purchase: 2, active: true)
+
+      visit item_path(@ogre)
+
+      click_button 'Add to Cart'
+
+      expect(current_path).to eq(items_path)
+
+      visit item_path(@hippo)
+
+      click_button 'Add to Cart'
+
+      click_on "Cart: 2"
+      expect(page).to have_content("Total: $70.00")
+      expect(page).to have_content("Cart: 2")
+
+      within "#item-#{@ogre.id}" do
+      click_button "More of This!"
+      end
+      
+      expect(page).to have_content("Cart: 3")
+      expect(page).not_to have_content("Total: $90.00")
+      expect(page).to have_content("Total: $86.00")
 
     end
   end
