@@ -86,7 +86,7 @@ ricky = Merchant.create!(name: "Ricky's This Ain't a Cult it's Socialism Shop & 
     ricky.bulk_discounts.create!(name: "Try it!  You deserve it!", percent_discount: 10, min_purchase: 1)
 
 
-    merchant_user = User.create!(name: "Arique", address: "1234 Drive", city: "Chicago", state: "IL", zip: "60651", email: "arique@merchant.com", password: "securepassword", role: 1)
+    merchant_user = User.create!(name: "Arique", address: "1234 Drive", city: "Chicago", state: "IL", zip: "60651", email: "arique@merchant.com", password: "securepassword", role: 1, merchant_id: arique.id)
 
     regular_user = User.create!(name: "Arique", address: "1234 Drive", city: "Chicago", state: "IL", zip: "60651", email: "arique@regular.com", password: "securepassword", role: 0)
 
