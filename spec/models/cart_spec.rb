@@ -9,7 +9,8 @@ RSpec.describe Cart do
       @giant = @megan.items.create!(name: 'Giant', description: "I'm a Giant!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 2 )
       @hippo = @brian.items.create!(name: 'Hippo', description: "I'm a Hippo!", price: 50, image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaLM_vbg2Rh-mZ-B4t-RSU9AmSfEEq_SN9xPP_qrA2I6Ftq_D9Qw', active: true, inventory: 3 )
 
-      BulkDiscount.create!(name: "5% off!", percent_discount: 5, min_purchase: 2, merchant_id: @megan.id, active: true)
+      @discount_1 = BulkDiscount.create!(name: "Labor Day Sale", percent_discount: 10, min_purchase: 2, merchant_id: @megan.id, active: true)
+      BulkDiscount.create!(name: "Zoo Theme Mania", percent_discount: 50, min_purchase: 20, merchant_id: @megan.id, active: true)
 
       @cart = Cart.new({
         @ogre.id.to_s => 1,
@@ -43,7 +44,7 @@ RSpec.describe Cart do
     end
 
     it '#grand_total' do
-      expect(@cart.grand_total).to eq(114.0)
+      expect(@cart.grand_total).to eq(110.0)
     end
 
     it '#count_of()' do
@@ -52,8 +53,8 @@ RSpec.describe Cart do
     end
 
     it '#subtotal_of()' do
-      expect(@cart.subtotal_of(@ogre.id)).to eq(19.0)
-      expect(@cart.subtotal_of(@giant.id)).to eq(95.0)
+      expect(@cart.subtotal_of(@ogre.id)).to eq(20.0)
+      expect(@cart.subtotal_of(@giant.id)).to eq(100.0)
     end
 
     it '#limit_reached?()' do
@@ -68,7 +69,7 @@ RSpec.describe Cart do
     end
 
     it "#find_discount" do
-      expect(@cart.discounts.count).to eq(1)
+      expect(@cart.find_discount(@ogre, 2).first).to eq(@discount_1)
     end
   end
 end

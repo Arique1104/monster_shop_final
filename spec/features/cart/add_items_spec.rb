@@ -32,5 +32,59 @@ RSpec.describe "Add Items to Cart" do
       expect(page).to have_content("#{@giant.name} has been added to your cart!")
       expect(page).to have_content("Cart: 2")
     end
+
+    it "Test for cart with normal quantity that adds more item to meet discount and shows new discount" do
+      @discount_1 = @megan.bulk_discounts.create!(name: "Labor Day Sale", percent_discount: 10, min_purchase: 2, active: true)
+
+      visit item_path(@ogre)
+
+      click_button 'Add to Cart'
+
+      expect(current_path).to eq(items_path)
+
+      click_on "Cart: 1"
+
+      expect(page).to have_content("Total: $20.00")
+
+      click_button "More of This!"
+
+      expect(page).to have_content("Quantity: 2")
+
+      expect(page).to have_content("Total: $36.00")
+
+      click_button "More of This!"
+
+      expect(page).to have_content("Quantity: 3")
+
+      expect(page).to have_content("Total: $54.00")
+
+    end
+
+    it "Test for a cart with items from at least 2 different merchants. One has a discount. Discount only applies to the item from merchant (that meets minimum quantities)" do
+      @discount_1 = @megan.bulk_discounts.create!(name: "Labor Day Sale", percent_discount: 10, min_purchase: 2, active: true)
+
+      visit item_path(@ogre)
+
+      click_button 'Add to Cart'
+
+      expect(current_path).to eq(items_path)
+
+      visit item_path(@hippo)
+
+      click_button 'Add to Cart'
+
+      click_on "Cart: 2"
+      expect(page).to have_content("Total: $70.00")
+      expect(page).to have_content("Cart: 2")
+
+      within "#item-#{@ogre.id}" do
+      click_button "More of This!"
+      end
+      
+      expect(page).to have_content("Cart: 3")
+      expect(page).not_to have_content("Total: $90.00")
+      expect(page).to have_content("Total: $86.00")
+
+    end
   end
 end

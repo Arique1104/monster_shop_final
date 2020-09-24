@@ -9,21 +9,8 @@ RSpec.describe "A merchant can create a new Bulk discount" do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@m_user)
 
       @item = @merchant_1.items.create!(name: "Mello", description: "Wowzer!", price: 12.50, inventory: 100, image: "https://i2.wp.com/www.cosect.net/wp-content/uploads/2019/07/wowzers-600x200.jpg?resize=600%2C200&ssl=1")
-
-#  def create
-    # merchant = current_user.merchant
-    # @discount = merchant.bulk_discounts.new(secure_params)
-    #
-    # if @discount.save
-    #   redirect_to "/merchant/bulk_discounts"
-    # else
-    #   flash[:notice] = "Please try again"
-    #   render :new
-    # end
-# end
-
-
     end
+    
     it "has a link to create a new bulk discount" do
       visit "/merchant"
 
