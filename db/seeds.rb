@@ -9,6 +9,8 @@
 
 tim = Merchant.create!(name: "Tim's Yah82cit", address: "Turing", city: "Denver", state: "CO", zip: 80218)
 
+    tim_user = tim.users.create!(name: "Tim", address: "Turing", city: "Denver", state: "CO", zip: 80218, email: "tim@merchant.com", password: "securepassword", role: 1)
+
     tim.items.create!(name: "Yah82cit", description: "You hate to see it!", price: 20, image: "https://www.behavioraleconomics.com/wp-content/uploads/2015/11/old-woman-laughing.jpeg", active: true, inventory: 45)
     tim.items.create!(name: "Yah82cit", description: "You hate to see it!", price: 25, image: "https://www.behavioraleconomics.com/wp-content/uploads/2015/11/old-woman-laughing.jpeg", active: true, inventory: 4)
 
@@ -16,7 +18,7 @@ tim = Merchant.create!(name: "Tim's Yah82cit", address: "Turing", city: "Denver"
 
 arique = Merchant.create!(name: "Arique's Thought Shop", address: "1234 Division St.", city: "Chicago", state: "IL", zip: 60651)
 
-    merchant_user = arique.users.create!(name: "Arique", address: "1234 Drive", city: "Chicago", state: "IL", zip: "60651", email: "arique@merchant.com", password: "securepassword", role: 1)
+    arique_user = arique.users.create!(name: "Arique", address: "1234 Drive", city: "Chicago", state: "IL", zip: 60651, email: "arique@merchant.com", password: "securepassword", role: 1)
 
     arique.items.create!(name: "Confidence", description: "You're only as confident as you allow yourself!", price: 100, image: "https://pbs.twimg.com/profile_images/1734721280/old.jpg", active: true, inventory: 80)
     arique.items.create!(name: "Joy", description: "Stability is the only gift you can try and give yourself again.", price: 100, image: "https://pbs.twimg.com/profile_images/1734721280/old.jpg", active: true, inventory: 80)
@@ -27,12 +29,16 @@ arique = Merchant.create!(name: "Arique's Thought Shop", address: "1234 Division
 
 maribel = Merchant.create!(name: "Maribel's Prayer Shop", address: "4321 Central Ave.", city: "Chicago", state: "IL", zip: 60606)
 
+    maribel_user = maribel.users.create!(name: "Maribel", address: "4321 Central Ave.", city: "Chicago", state: "IL", zip: 60606, email: "maribel@merchant.com", password: "securepassword", role: 1)
+
     maribel.items.create!(name: "The Lord's Prayer", description: "The Lord is my guide", price: 1, image: "https://i.pinimg.com/236x/52/b5/f2/52b5f2ef7a9189afd35d8a180d406683--photo-pic-old-age.jpg", active: true, inventory: 80)
     maribel.items.create!(name: "Annointing Oil", description: "For all prayer needs", price: 1, image: "https://i.pinimg.com/236x/52/b5/f2/52b5f2ef7a9189afd35d8a180d406683--photo-pic-old-age.jpg", active: true, inventory: 80)
 
     maribel.bulk_discounts.create!(name: "Tithe", percent_discount: 10, min_purchase: 10, active: true)
 
 getulio = Merchant.create!(name: "Getulio's Lock Shop", address: "9087 Armitage St.", city: "Chicago", state: "IL", zip: 60647)
+
+    getulio_user = getulio.users.create!(name: "Getulio", address: "9087 Armitage St.", city: "Chicago", state: "IL", zip: 60647, email: "getulio@merchant.com", password: "securepassword", role: 1)
 
     getulio.items.create!(name: "Don't Get Locked Out!", description: "Subscription To Emergency Locksmith Needs", price: 300, image: "https://i.pinimg.com/236x/b9/22/dc/b922dc95b2f612a470a0b4540e9dc13e--irving-penn-portrait-male-faces.jpg", active: true, inventory: 80)
     getulio.items.create!(name: "New Lock", description: "Front Gate Lock", price: 375, image: "https://i.pinimg.com/236x/b9/22/dc/b922dc95b2f612a470a0b4540e9dc13e--irving-penn-portrait-male-faces.jpg", active: true, inventory: 80)
@@ -41,12 +47,16 @@ getulio = Merchant.create!(name: "Getulio's Lock Shop", address: "9087 Armitage 
 
 wilmer = Merchant.create!(name: "Wilmer's Fortnite Extravaganza", address: "7503 Cannon Valley Place", city: "Northfield", state: "MN", zip: 55057)
 
+    wilmer_user = wilmer.users.create!(name: "Wilmer", address: "7503 Cannon Valley Place", city: "Northfield", state: "MN", zip: 55057, email: "wilmer@merchant.com", password: "securepassword", role: 1)
+
     wilmer.items.create!(name: "Victory Royale #1", description: "Get in for the win!", price: 89, image: "https://i.pinimg.com/236x/45/6b/1f/456b1f0ee7ff96dcff1436f920df6457--male-portraits-character-portraits.jpg", active: true, inventory: 100)
     wilmer.items.create!(name: "Practice Mode", description: "Get. Better. Period.", price: 375, image: "https://i.pinimg.com/236x/45/6b/1f/456b1f0ee7ff96dcff1436f920df6457--male-portraits-character-portraits.jpg", active: true, inventory: 80)
 
     wilmer.bulk_discounts.create!(name: "First Time Buyers!", percent_discount: 10, min_purchase: 1, active: true)
 
 lasondra = Merchant.create!(name: "Lasondra's Art Shop", address: "3456 South Side Street", city: "Chicago", state: "IL", zip: 60606)
+
+    lasondra_user = lasondra.users.create!(name: "Lasondra", address: "3456 South Side Street", city: "Chicago", state: "IL", zip: 60606, email: "lasondra@merchant.com", password: "securepassword", role: 1)
 
     lasondra.items.create!(name: "Tutor", description: "Exercise your brain", price: 15, image: "https://i.pinimg.com/236x/ff/13/cb/ff13cb19185a02caeccdc32c28ec7b92--year-old-farmers.jpg", active: true, inventory: 100)
     lasondra.items.create!(name: "Artist Consultant Session", description: "Get. Better. Period.", price: 700, image: "https://i.pinimg.com/236x/ff/13/cb/ff13cb19185a02caeccdc32c28ec7b92--year-old-farmers.jpg", active: true, inventory: 80)
@@ -55,12 +65,17 @@ lasondra = Merchant.create!(name: "Lasondra's Art Shop", address: "3456 South Si
 
 hillary = Merchant.create!(name: "Hillary's Party Shop", address: "5678 South Reading Street", city: "Minneapolis", state: "MN", zip: 55057)
 
+    hillary_user = hillary.users.create!(name: "Hillary", address: "5678 South Reading Street", city: "Minneapolis", state: "MN", zip: 55057, email: "hillary@merchant.com", password: "securepassword", role: 1)
+
     hillary.items.create!(name: "Tutor", description: "Exercise your brain", price: 15, image: "https://i.pinimg.com/236x/10/b4/e0/10b4e0bd88dd53c356b54749baac4cc2--life-s-old-age.jpg", active: true, inventory: 100)
     hillary.items.create!(name: "Loving Soul", description: "Get. Better. Period.", price: 700, image: "https://i.pinimg.com/236x/10/b4/e0/10b4e0bd88dd53c356b54749baac4cc2--life-s-old-age.jpg", active: true, inventory: 80)
 
     hillary.bulk_discounts.create!(name: "Try it!  You deserve it!", percent_discount: 10, min_purchase: 1, active: true)
 
 ed = Merchant.create!(name: "Ed's Golf Shop", address: "12345 Caring Ave", city: "Raleigh", state: "NC", zip: 27601)
+
+    ed_user = ed.users.create!(name: "Ed", address: "12345 Caring Ave", city: "Raleigh", state: "NC", zip: 27601, email: "ed@merchant.com", password: "securepassword", role: 1)
+
 
     ed.items.create!(name: "Care Giver", description: "Give when you can, but take no shit", price: 15, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTPbvHJbubxaTgiNRD27_LVfe3sCPGtv1KGfw&usqp=CAU", active: true, inventory: 100)
     ed.items.create!(name: "Cold Wisdom", description: "Get. Better. Period.", price: 700, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTPbvHJbubxaTgiNRD27_LVfe3sCPGtv1KGfw&usqp=CAU", active: true, inventory: 80)
@@ -69,12 +84,16 @@ ed = Merchant.create!(name: "Ed's Golf Shop", address: "12345 Caring Ave", city:
 
 jackie = Merchant.create!(name: "Jackie's Astronaut Training", address: "1234 University Road", city: "Urbana Champagne", state: "IL", zip: 61820)
 
+    jackie_user = jackie.users.create!(name: "Jackie", address: "1234 University Road", city: "Urbana Champagne", state: "IL", zip: 61820, email: "jackie@merchant.com", password: "securepassword", role: 1)
+
     jackie.items.create!(name: "I'm an Astro Engineer", description: "I'm in a sorority now!", price: 15, image: "https://i.pinimg.com/236x/e9/11/76/e911763e56986bc92cdfbdbbdf16e58e--homeless-people-white-photography.jpg", active: true, inventory: 100)
     jackie.items.create!(name: "Cold Wisdom", description: "Get. Better. Period.", price: 700, image: "https://i.pinimg.com/236x/e9/11/76/e911763e56986bc92cdfbdbbdf16e58e--homeless-people-white-photography.jpg", active: true, inventory: 80)
 
     jackie.bulk_discounts.create!(name: "Try it!  You deserve it!", percent_discount: 10, min_purchase: 1, active: true)
 
 priya = Merchant.create!(name: "Priya's Personal Power Inc.", address: "1234 Shine", city: "Denver", state: "CO", zip: 80016)
+
+    priya_user = priya.users.create!(name: "Priya", address: "1234 Shine", city: "Denver", state: "CO", zip: 80016, email: "priya@merchant.com", password: "securepassword", role: 1)
 
     priya.items.create!(name: "Become Your Best Self!", description: "One trusting step at a time", price: 15, image: "https://i.pinimg.com/originals/a9/23/e5/a923e57cf47eff4c5a50258a3243d1c2.jpg", active: true, inventory: 100)
     priya.items.create!(name: "Cold Wisdom", description: "Get. Better. Period.", price: 700, image: "https://i.pinimg.com/originals/a9/23/e5/a923e57cf47eff4c5a50258a3243d1c2.jpg", active: true, inventory: 80)
@@ -83,16 +102,13 @@ priya = Merchant.create!(name: "Priya's Personal Power Inc.", address: "1234 Shi
 
 ricky = Merchant.create!(name: "Ricky's This Ain't a Cult it's Socialism Shop & Farm", address: "1234 Cult Drive", city: "Denver", state: "CO", zip: 80016)
 
+    ricky_user = ricky.users.create!(name: "Ricky", address: "1234 Cult Drive", city: "Denver", state: "CO", zip: 80016, email: "ricky@merchant.com", password: "securepassword", role: 1)
+
+
     ricky.items.create!(name: "It's not a cult, I promise!", description: "It might still be a cult", price: 15, image: "https://cdn.tutsplus.com/photo/uploads/legacy/363_oldgeneration/pt-seniors-3.jpg", active: true, inventory: 100)
     ricky.items.create!(name: "Cold Wisdom", description: "Get. Better. Period.", price: 700, image: "https://cdn.tutsplus.com/photo/uploads/legacy/363_oldgeneration/pt-seniors-3.jpg", active: true, inventory: 80)
 
     ricky.bulk_discounts.create!(name: "Try it!  You deserve it!", percent_discount: 10, min_purchase: 1, active: true)
-
-
-
-
-    regular_user = User.create!(name: "Arique", address: "1234 Drive", city: "Chicago", state: "IL", zip: "60651", email: "arique@regular.com", password: "securepassword", role: 0)
-
 
 
 
