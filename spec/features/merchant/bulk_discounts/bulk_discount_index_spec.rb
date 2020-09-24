@@ -45,5 +45,23 @@ RSpec.describe 'New Merchant Bulk Discount' do
 
       expect(current_path).to eq("/merchant/bulk_discounts/#{@discount.id}")
     end
+
+    it "can show multiple discounts on one page" do
+      @discount_3 = BulkDiscount.create!(name: "10% off!", percent_discount: 10, min_purchase: 15, merchant_id: @merchant_1.id)
+      @discount_4 = BulkDiscount.create!(name: "10% off!", percent_discount: 10, min_purchase: 15, merchant_id: @merchant_1.id)
+      @discount_5 = BulkDiscount.create!(name: "10% off!", percent_discount: 10, min_purchase: 15, merchant_id: @merchant_1.id)
+
+      visit "/merchant"
+
+      click_link 'My Bulk Discounts'
+
+      expect(current_path).to eq("/merchant/bulk_discounts")
+
+
+      expect(page).to have_content("#{@discount_3.name}")
+      expect(page).to have_content("#{@discount_4.name}")
+      expect(page).to have_content("#{@discount_5.name}")
+
+    end
   end
 end
