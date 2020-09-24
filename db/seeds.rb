@@ -15,6 +15,9 @@ tim = Merchant.create!(name: "Tim's Yah82cit", address: "Turing", city: "Denver"
     tim.bulk_discounts.create!(name: "Try it out!", percent_discount: 10, min_purchase: 2)
 
 arique = Merchant.create!(name: "Arique's Thought Shop", address: "1234 Division St.", city: "Chicago", state: "IL", zip: 60651)
+
+    merchant_user = arique.users.create!(name: "Arique", address: "1234 Drive", city: "Chicago", state: "IL", zip: "60651", email: "arique@merchant.com", password: "securepassword", role: 1)
+
     arique.items.create!(name: "Confidence", description: "You're only as confident as you allow yourself!", price: 100, image: "https://pbs.twimg.com/profile_images/1734721280/old.jpg", active: true, inventory: 80)
     arique.items.create!(name: "Joy", description: "Stability is the only gift you can try and give yourself again.", price: 100, image: "https://pbs.twimg.com/profile_images/1734721280/old.jpg", active: true, inventory: 80)
 
@@ -86,7 +89,7 @@ ricky = Merchant.create!(name: "Ricky's This Ain't a Cult it's Socialism Shop & 
     ricky.bulk_discounts.create!(name: "Try it!  You deserve it!", percent_discount: 10, min_purchase: 1)
 
 
-    merchant_user = User.create!(name: "Arique", address: "1234 Drive", city: "Chicago", state: "IL", zip: "60651", email: "arique@merchant.com", password: "securepassword", role: 1, merchant_id: arique.id)
+
 
     regular_user = User.create!(name: "Arique", address: "1234 Drive", city: "Chicago", state: "IL", zip: "60651", email: "arique@regular.com", password: "securepassword", role: 0)
 
