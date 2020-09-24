@@ -12,7 +12,7 @@ tim = Merchant.create!(name: "Tim's Yah82cit", address: "Turing", city: "Denver"
     tim.items.create!(name: "Yah82cit", description: "You hate to see it!", price: 20, image: "https://www.behavioraleconomics.com/wp-content/uploads/2015/11/old-woman-laughing.jpeg", active: true, inventory: 45)
     tim.items.create!(name: "Yah82cit", description: "You hate to see it!", price: 25, image: "https://www.behavioraleconomics.com/wp-content/uploads/2015/11/old-woman-laughing.jpeg", active: true, inventory: 4)
 
-    tim.bulk_discounts.create!(name: "Try it out!", percent_discount: 10, min_purchase: 2, active: true, active: true)
+    tim.bulk_discounts.create!(name: "Try it out!", percent_discount: 10, min_purchase: 2, active: true)
 
 arique = Merchant.create!(name: "Arique's Thought Shop", address: "1234 Division St.", city: "Chicago", state: "IL", zip: 60651)
 
