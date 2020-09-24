@@ -49,7 +49,7 @@ class Merchant::BulkDiscountController < Merchant::BaseController
   end
 
   def destroy
-    BulkDiscount.destroy(params[:id])
+    current_user.merchant.bulk_discounts.destroy(params[:id])
     redirect_to "/merchant/bulk_discounts"
   end
 
