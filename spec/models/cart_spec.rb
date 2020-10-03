@@ -70,6 +70,8 @@ RSpec.describe Cart do
 
     it "#find_discount" do
       expect(@cart.find_discount(@ogre, 2).first).to eq(@discount_1)
+      #can it find the greatest of the discounts
+      #can it exclude discounts with the minial quantity
     end
   end
 end

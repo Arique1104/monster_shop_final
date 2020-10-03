@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get :root, to: 'welcome#index'
-  get "/", to: 'welcome#index'
 
   resources :merchants do
     resources :items, only: [:index]
@@ -13,36 +12,48 @@ Rails.application.routes.draw do
 
   resources :reviews, only: [:edit, :update, :destroy]
 
-  get '/cart', to: 'cart#show'
-  post '/cart/:item_id', to: 'cart#add_item'
-  delete '/cart', to: 'cart#empty'
-  patch '/cart/:change/:item_id', to: 'cart#update_quantity'
-  delete '/cart/:item_id', to: 'cart#remove_item'
 
-  get '/registration', to: 'users#new', as: :registration
+ resource :cart, only: [:show], controller: 'cart' do
+    post ':item_id', :action => 'add_item'
+    delete '', :action => 'empty'
+    patch ':change/:item_id', :action => 'update_quantity'
+    delete ':item_id', :action => 'remove_item'
+  end
+
   resources :users, only: [:create, :update]
-  patch '/user/:id', to: 'users#update'
-  get '/profile', to: 'users#show'
-  get '/profile/edit', to: 'users#edit'
-  get '/profile/edit_password', to: 'users#edit_password'
-  post '/orders', to: 'user/orders#create'
-  get '/profile/orders', to: 'user/orders#index'
-  get '/profile/orders/:id', to: 'user/orders#show'
-  delete '/profile/orders/:id', to: 'user/orders#cancel'
 
-  get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#login'
-  get '/logout', to: 'sessions#logout'
+  scope controller: 'users' do
+    get '/registration', :action => 'new', as: :registration
+    patch '/user/:id', :action => 'update'
+    get '/profile', :action => 'show'
+    get '/profile/edit', :action => 'edit'
+    get '/profile/edit_password', :action => 'edit_password'
+  end
+
+  scope controller: 'orders', module: 'user' do
+    post '/orders', :action => 'create'
+    get '/profile/orders', :action => 'index'
+    get '/profile/orders/:id', :action => 'show'
+    delete '/profile/orders/:id', :action => 'cancel'
+  end
+
+  scope controller: 'sessions' do
+    get '/login', :action => 'new'
+    post '/login', :action => 'login'
+    get '/logout', :action => 'logout'
+  end
 
   namespace :merchant do
-    get '/bulk_discounts/:id/edit', to: 'bulk_discount#edit'
-    patch 'bulk_discounts/:id/update', to: 'bulk_discount#update'
-    delete 'bulk_discounts/:id', to: 'bulk_discount#destroy'
-    post '/bulk_discounts/create', to: 'bulk_discount#create'
-    get '/bulk_discounts/new', to: 'bulk_discount#new'
-    get '/bulk_discounts/:id', to: 'bulk_discount#show'
-    get '/bulk_discounts', to: 'bulk_discount#index'
-    patch '/bulk_discounts/:id', to: 'bulk_discount#update_status'
+    scope 'bulk_discounts', controller: 'bulk_discount' do
+      get ':id/edit', :action => 'edit'
+      patch ':id/update', :action => 'update'
+      delete ':id', :action => 'destroy'
+      post 'create', :action => 'create'
+      get 'new', :action => 'new'
+      get ':id', :action => 'show'
+      get '', :action => 'index'
+      patch ':id', :action => 'update_status'
+    end
 
     get '/', to: 'dashboard#index', as: :dashboard
     resources :orders, only: :show
